@@ -8,37 +8,13 @@ uses UComplexTools;
 
 type
   ArrayTools = class
-    
-    public static procedure PrintArray<T>(
-      arr: array of T; 
-      x: integer; 
-      y: integer);
-    
+    public static procedure PrintArray<T>(arr: array of T; x: integer; y: integer);
     public static procedure PrintArray<T>(arr: array of T);
-    
-    public static procedure PrintArray<T>(
-      arr: array [,] of T; 
-      x: integer; 
-      y: integer);
-    
+    public static procedure PrintArray<T>(arr: array [,] of T; x: integer; y: integer);
     public static procedure PrintArray<T>(arr: array [,] of T);
-    
-    public static function ReadArray<T>(
-      arr: array of T;
-      outX: integer;
-      outY: integer;
-      inputX: integer;
-      inputY: integer): array of T;
-    
+    public static function ReadArray<T>(arr: array of T; outX: integer; outY: integer; inputX: integer; inputY: integer): array of T;
     public static function ReadArray<T>(arr: array of T): array of T;
-    
-    public static function ReadArray<T>(
-      arr: array [,] of T;
-      outX: integer;
-      outY: integer;
-      inputX: integer;
-      inputY: integer): array [,] of T;
-    
+    public static function ReadArray<T>(arr: array [,] of T; outX: integer; outY: integer; inputX: integer; inputY: integer): array [,] of T;
     public static function ReadArray<T>(arr: array [,] of T): array [,] of T;
   end;
 
