@@ -31,9 +31,9 @@ type
     public function Prod(a: real): Complex;
     public function Conjugate(): Complex;
     public function Inv(): Complex;
-    public function ToString(): string;
-    static function operator explicit(a: Complex): string;
-    static function operator implicit(r: real): Complex;
+    public function ToString(): string; override;
+    static function operator implicit(s: string): Complex;
+    static function operator implicit(a: TComplex): Complex;
   end;
 
 implementation
@@ -99,20 +99,17 @@ end;
 
 static function Complex.operator+(a, b: Complex): Complex;
 begin
-  var t: TComplex := TComplex(a) + TComplex(b);
-  Result := new Complex(t.re, t.im);
+  Result := TComplex(a) + TComplex(b);
 end;
 
 static function Complex.operator-(a, b: Complex): Complex;
 begin
-  var t: TComplex := TComplex(a) - TComplex(b);
-  Result := new Complex(t.re, t.im);
+  Result := TComplex(a) - TComplex(b);
 end;
 
 static function Complex.operator*(a, b: Complex): Complex;
 begin
-  var t: TComplex := TComplex(a) * TComplex(b);
-  Result := new Complex(t.re, t.im);
+  Result := TComplex(a) * TComplex(b);
 end;
 
 static function Complex.operator=(a, b: Complex): boolean;
@@ -122,8 +119,7 @@ end;
 
 static function Complex.operator/(a, b: Complex): Complex;
 begin
-  var t: TComplex := TComplex(a) / TComplex(b);
-  Result := new Complex(t.re, t.im);
+  Result := TComplex(a) / TComplex(b);
 end;
 
 function Complex.Abs(): real;
@@ -133,35 +129,32 @@ end;
 
 function Complex.Prod(a: real): Complex;
 begin
-  var t: TComplex := inherited Prod(a);
-  Result := new Complex(t.re, t.im);
+  Result := inherited Prod(a);
 end;
 
 function Complex.Conjugate(): Complex;
 begin
-  var t: TComplex := inherited Conjugate();
-  Result := new Complex(t.re, t.im);
+  Result := inherited Conjugate();
 end;
 
 function Complex.Inv(): Complex;
 begin
-  var t: TComplex := inherited Inv();
-  Result := new Complex(t.re, t.im);
+  Result := inherited Inv();
 end;
 
 function Complex.ToString(): string;
 begin
-  Result := inherited 
+  Result := inherited
 end;
 
-static function Complex.operator explicit(a: Complex): string;
+static function Complex.operator implicit(s: string): Complex;
 begin
-  Result := a.ToString();
+  Result := TComplex(s);
 end;
 
-static function Complex.operator implicit(r: real): Complex;
+static function Complex.operator implicit(a: TComplex): Complex;
 begin
-  Result := new Complex(r, 0);
-end; 
+  Result := new Complex(a.re, a.im);
+end;
 
 end.

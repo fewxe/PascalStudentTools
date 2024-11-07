@@ -72,7 +72,7 @@
   begin
     var arr2: array of T := new T[arr.Length];
     arr.CopyTo(arr2, 0);
-    var s: string := '';
+    var s: string;
     s += '[';
     for var i: integer := 0 to arr2.Length - 1 do
     begin
@@ -81,11 +81,17 @@
       var str: string := ReadString();
       crt.GotoXY(1, WhereY() - 1);
       crt.ClearLine();
-      s += str;
+      
+      var implicitMethod := typeof(T).GetMethod('op_Implicit',  System.Reflection.BindingFlags.Public or System.Reflection.BindingFlags.Static, nil, new System.Type[](typeof(string)), nil);
+      if (implicitMethod <> nil) then
+        arr2[i] := T(implicitMethod.Invoke(nil, new object[](str)))
+      else
+        arr2[i] := T(Convert.ChangeType(str, typeof(T)));
+
+      GoToXY(outX, outY);
+      s += arr2[i].ToString();
       if (i <> arr2.Length - 1) then 
         s += ', ';
-      arr2[i] := T(Convert.ChangeType(str, typeof(T)));
-      GoToXY(outX, outY);
       write(s);
     end;
     s += ']';
