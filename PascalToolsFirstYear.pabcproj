@@ -4,6 +4,7 @@
     <Item Type="SourceFile" Name="PascalToolsFirstYear.pas" Path="PascalToolsFirstYear.pas" />
     <Item Type="SourceFile" Name="UComplexTools.pas" Path="UComplexTools.pas" />
     <Item Type="SourceFile" Name="UArrayTools.pas" Path="UArrayTools.pas" />
+    <Item Type="SourceFile" Name="UVector.pas" Path="UVector.pas" />
     <Item Type="Reference" AssemblyName="System" FullAssemblyName="System.dll" />
   </Items>
 </Project>
