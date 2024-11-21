@@ -43,6 +43,11 @@ type
       Result := (a.x = b.x) and (a.y = b.y) and (a.z = b.z);
     end;
     
+    public function Abs(): real;
+    begin
+      Result := Sqrt(Self * Self)
+    end;
+    
     public function Length(): real;
     begin
       Result := sqrt(Sqr(Self.x) + Sqr(Self.y) + Sqr(Self.z));

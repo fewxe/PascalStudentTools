@@ -46,6 +46,7 @@ type
     static function operator*(a, b: Vector): real;
     static function operator**(a, b: Vector): Vector;
     static function operator=(a, b: Vector): boolean;
+    public function Abs(): real;
     public function Length(): real;
     public function ToString(): string; override;
     static function operator implicit(a: TVector): Vector;
@@ -202,6 +203,11 @@ end;
 static function Vector.operator=(a, b: Vector): boolean;
 begin
   Result := TVector(a) = TVector(b)
+end;
+
+function Vector.Abs(): real;
+begin
+  Result := inherited
 end;
 
 function Vector.Length(): real;
