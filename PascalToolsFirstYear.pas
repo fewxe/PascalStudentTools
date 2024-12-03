@@ -35,6 +35,7 @@ type
     public function ToString(): string; override;
     static function operator implicit(s: string): Complex;
     static function operator implicit(a: TComplex): Complex;
+    public function Sqrt(): Complex;
   end;
 
 type
@@ -47,9 +48,22 @@ type
     static function operator**(a, b: Vector): Vector;
     static function operator=(a, b: Vector): boolean;
     public function Abs(): real;
-    public function Length(): real;
     public function ToString(): string; override;
     static function operator implicit(a: TVector): Vector;
+  end;
+  
+type
+  VectorComplex = class(TVectorComplex)
+    public x, y, z: Complex;
+    constructor Create(x, y, z: Complex);
+    static function operator+(a, b: VectorComplex): VectorComplex;
+    static function operator-(a, b: VectorComplex): VectorComplex;
+    static function operator*(a, b: VectorComplex): Complex;
+    static function operator**(a, b: VectorComplex): VectorComplex;
+    static function operator=(a, b: VectorComplex): boolean;
+    public function Abs(): Complex;
+    public function ToString(): string; override;
+    static function operator implicit(a: TVectorComplex): VectorComplex;
   end;
   
 implementation
@@ -174,6 +188,11 @@ begin
   Result := new Complex(a.re, a.im);
 end;
 
+function Complex.Sqrt(): Complex;
+begin
+  Result := inherited Sqrt();
+end;
+
 
 constructor Vector.Create(x, y, z: real);
 begin
@@ -210,11 +229,6 @@ begin
   Result := inherited
 end;
 
-function Vector.Length(): real;
-begin
-  Result := inherited
-end;
-
 function Vector.ToString(): string;
 begin
   Result := inherited
@@ -223,6 +237,52 @@ end;
 static function Vector.operator implicit(a: TVector): Vector;
 begin
   Result := new Vector(a.x, a.y, a.z)
+end;
+
+
+constructor VectorComplex.Create(x, y, z: Complex);
+begin
+  inherited Create
+end;
+
+static function VectorComplex.operator+(a, b: VectorComplex): VectorComplex;
+begin
+  Result := TVectorComplex(a) + TVectorComplex(b)
+end;
+
+static function VectorComplex.operator-(a, b: VectorComplex): VectorComplex;
+begin
+  Result := TVectorComplex(a) + TVectorComplex(b)
+end;
+
+static function VectorComplex.operator*(a, b: VectorComplex): Complex;
+begin
+  Result := TVectorComplex(a) * TVectorComplex(b)
+end;
+
+static function VectorComplex.operator**(a, b: VectorComplex): VectorComplex;
+begin
+  Result := TVectorComplex(a) ** TVectorComplex(b)
+end;
+
+static function VectorComplex.operator=(a, b: VectorComplex): boolean;
+begin
+  Result := TVectorComplex(a) = TVectorComplex(b)
+end;
+
+function VectorComplex.Abs(): Complex;
+begin
+  Result := inherited Abs()
+end;
+
+function VectorComplex.ToString(): string;
+begin
+  Result := inherited
+end;
+
+static function VectorComplex.operator implicit(a: TVectorComplex): VectorComplex;
+begin
+  Result := new VectorComplex(a.x, a.y, a.z)
 end;
 
 end.

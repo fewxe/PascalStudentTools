@@ -33,7 +33,7 @@ type
     
     public function Abs(): real;
     begin
-      Result := Sqrt(Sqr(self.re) + Sqr(self.im));
+      Result := PABCSystem.Sqrt(Sqr(self.re) + Sqr(self.im));
     end;
     
     public function Prod(a: real): TComplex;
@@ -82,6 +82,16 @@ type
         imString := imString.Substring(0, imString.Length - 1);
  
       Result := new TComplex(reString.ToReal(), imString.ToReal());
+    end;
+    
+    public function Sqrt(): TComplex;
+    begin
+      var r: real := PABCSystem.Sqrt(self.re * self.re + self.im * self.im);
+      var u: real := PABCSystem.Sqrt((r + re) / 2);
+      var v: real := PABCSystem.Sqrt((r - re) / 2);
+      if self.im < 0 then
+        v := -v;
+      Result := new TComplex(u, v);
     end;
     
     public function ToString(): string; override;
